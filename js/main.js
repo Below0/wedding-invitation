@@ -326,3 +326,45 @@ if (commentForm) {
     }
   });
 }
+
+function formatTime(timestamp) {
+  if (!timestamp) return '';
+  const d = timestamp.toDate();
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  const dd = String(d.getDate()).padStart(2, '0');
+  const hh = String(d.getHours()).padStart(2, '0');
+  const min = String(d.getMinutes()).padStart(2, '0');
+  return `${mm}/${dd} ${hh}:${min}`;
+}
+
+function renderComment(doc) {
+  const { name, message, graduate, createdAt } = doc.data();
+  const li = document.createElement('li');
+  li.className = 'comment-item';
+  li.innerHTML = `
+    <div class="comment-header">
+      <span class="comment-name">${graduate ? '🎓 ' : ''}${escapeHtml(name)}</span>
+      <span class="comment-time">${formatTime(createdAt)}</span>
+    </div>
+    <p class="comment-message">${escapeHtml(message)}</p>
+  `;
+  return li;
+}
+
+function escapeHtml(str) {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+const commentList = document.getElementById('comment-list');
+db.collection('comments')
+  .orderBy('createdAt', 'desc')
+  .onSnapshot((snapshot) => {
+    commentList.innerHTML = '';
+    snapshot.forEach((doc) => {
+      commentList.appendChild(renderComment(doc));
+    });
+  });
