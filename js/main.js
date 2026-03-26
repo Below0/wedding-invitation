@@ -183,7 +183,23 @@ galleryToggleBtn.addEventListener('click', () => {
 });
 
 /* =========================================================
-   8. Kakao Share
+   8. Easter Egg — Daily Photo Graduate
+   ========================================================= */
+function unlockGraduate() {
+  if (localStorage.getItem('daily_graduate') === 'true') return;
+  localStorage.setItem('daily_graduate', 'true');
+  showToast('🎓 일상 졸업! 댓글에 특별 뱃지가 생겼어요');
+}
+
+gallerySwiper.on('slideChange', () => {
+  if (!showingDaily || dailyPhotos.length === 0) return;
+  if (gallerySwiper.realIndex === dailyPhotos.length - 1) {
+    unlockGraduate();
+  }
+});
+
+/* =========================================================
+   9. Kakao Share
    ========================================================= */
 Kakao.init(CONFIG.KAKAO_APP_KEY);
 
@@ -212,7 +228,7 @@ document.getElementById('kakao-share').addEventListener('click', () => {
 });
 
 /* =========================================================
-   9. Kakao Map
+   10. Kakao Map
    ========================================================= */
 try {
   const mapContainer = document.getElementById('kakao-map');
@@ -237,14 +253,14 @@ try {
 }
 
 /* =========================================================
-   10. URL Copy
+   11. URL Copy
    ========================================================= */
 document.getElementById('copy-url').addEventListener('click', () => {
   copyToClipboard(CONFIG.SITE_URL, 'URL이 복사되었습니다');
 });
 
 /* =========================================================
-   11. D-day Counter
+   12. D-day Counter
    ========================================================= */
 const weddingDate = new Date('2027-05-29T15:00:00+09:00');
 function updateDday() {
@@ -261,7 +277,7 @@ function updateDday() {
 updateDday();
 
 /* =========================================================
-   12. Scroll Animations (Intersection Observer)
+   13. Scroll Animations (Intersection Observer)
    ========================================================= */
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
