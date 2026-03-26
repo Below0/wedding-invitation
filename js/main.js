@@ -196,14 +196,56 @@ document.getElementById('kakao-share').addEventListener('click', () => {
 });
 
 /* =========================================================
-   9. URL Copy
+   9. Kakao Map
+   ========================================================= */
+try {
+  const mapContainer = document.getElementById('kakao-map');
+  const mapOption = {
+    center: new kakao.maps.LatLng(37.5594054, 126.9817843),
+    level: 3,
+  };
+  const map = new kakao.maps.Map(mapContainer, mapOption);
+
+  const marker = new kakao.maps.Marker({
+    position: new kakao.maps.LatLng(37.5594054, 126.9817843),
+  });
+  marker.setMap(map);
+
+  const infowindow = new kakao.maps.InfoWindow({
+    content: '<div style="padding:4px 8px;font-size:12px;white-space:nowrap;">우리은행 본점 4층</div>',
+  });
+  infowindow.open(map, marker);
+} catch (e) {
+  const mapContainer = document.getElementById('kakao-map');
+  if (mapContainer) mapContainer.style.display = 'none';
+}
+
+/* =========================================================
+   10. URL Copy
    ========================================================= */
 document.getElementById('copy-url').addEventListener('click', () => {
   copyToClipboard(CONFIG.SITE_URL, 'URL이 복사되었습니다');
 });
 
 /* =========================================================
-   10. Scroll Animations (Intersection Observer)
+   11. D-day Counter
+   ========================================================= */
+const weddingDate = new Date('2027-05-29T15:00:00+09:00');
+function updateDday() {
+  const now = new Date();
+  const diff = weddingDate - now;
+  const el = document.getElementById('dday');
+  if (diff <= 0) {
+    el.textContent = '오늘 결혼합니다 🎉';
+  } else {
+    const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+    el.textContent = `결혼식까지 D-${days}`;
+  }
+}
+updateDday();
+
+/* =========================================================
+   12. Scroll Animations (Intersection Observer)
    ========================================================= */
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {

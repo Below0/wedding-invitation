@@ -78,6 +78,15 @@ a {
   letter-spacing: 0.05em;
 }
 
+.section-desc {
+  text-align: center;
+  font-size: 0.82rem;
+  color: #999;
+  line-height: 1.8;
+  margin-top: -16px;
+  margin-bottom: 28px;
+}
+
 .section {
   opacity: 0;
   transform: translateY(20px);
@@ -334,6 +343,15 @@ a {
   letter-spacing: 0.05em;
 }
 
+.dday-counter {
+  text-align: center;
+  font-family: var(--font-serif);
+  font-size: 0.88rem;
+  color: var(--accent);
+  margin-top: 12px;
+  letter-spacing: 0.03em;
+}
+
 /* ============================================================
    6. Gallery Section
    ============================================================ */
@@ -452,6 +470,10 @@ a {
 .venue-note {
   font-size: 0.8rem;
   color: #999;
+}
+
+.map-embed {
+  margin-bottom: 20px;
 }
 
 .map-buttons {
