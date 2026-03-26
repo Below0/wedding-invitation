@@ -1,1 +1,586 @@
 /* Mobile Wedding Invitation — style.css */
+
+/* ============================================================
+   1. Design Tokens & Reset
+   ============================================================ */
+
+:root {
+  --bg: #FFFDF9;
+  --text: #6b6b6b;
+  --text-dark: #3C3C3C;
+  --accent: #C9A68E;
+  --divider: #E8E0D8;
+  --font-body: 'Pretendard Variable', Pretendard, -apple-system, sans-serif;
+  --font-serif: 'Nanum Myeongjo', serif;
+  --max-width: 430px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text);
+  background: #f0ebe5;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ============================================================
+   2. Main Container & Base
+   ============================================================ */
+
+.invitation {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  background: var(--bg);
+  min-height: 100vh;
+}
+
+.section-inner {
+  padding: 60px 24px;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: var(--text-dark);
+  text-align: center;
+  margin-bottom: 32px;
+  letter-spacing: 0.05em;
+}
+
+.section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero {
+  opacity: 1;
+  transform: none;
+}
+
+/* ============================================================
+   3. Hero Section
+   ============================================================ */
+
+@keyframes bounce {
+  0%, 100% { transform: rotate(45deg) translateY(0); }
+  50% { transform: rotate(45deg) translateY(6px); }
+}
+
+.section.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: url('../images/sample/01.jpg');
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: #fff;
+  padding: 0 24px;
+}
+
+.hero-label {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+
+.hero-names {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin-bottom: 20px;
+  letter-spacing: 0.05em;
+}
+
+.hero-names .heart {
+  color: var(--accent);
+}
+
+.hero-date {
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+  opacity: 0.9;
+}
+
+.hero-venue {
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  opacity: 0.85;
+}
+
+.scroll-down {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.scroll-arrow {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-right: 2px solid rgba(255, 255, 255, 0.7);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.7);
+  transform: rotate(45deg);
+  animation: bounce 1.4s ease-in-out infinite;
+}
+
+/* BGM Button */
+.bgm-btn {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 100;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+  background: rgba(30, 30, 30, 0.88);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+/* ============================================================
+   4. Greeting Section
+   ============================================================ */
+
+.greeting .section-inner {
+  text-align: center;
+}
+
+.divider {
+  color: var(--accent);
+  font-size: 1.2rem;
+  margin-bottom: 28px;
+  letter-spacing: 0.3em;
+}
+
+.greeting-text {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  line-height: 2.2;
+  color: var(--text);
+  margin-bottom: 28px;
+}
+
+.greeting-names {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-dark);
+  letter-spacing: 0.1em;
+}
+
+/* ============================================================
+   5. Calendar Section
+   ============================================================ */
+
+.calendar-grid {
+  max-width: 320px;
+  margin: 0 auto 20px;
+}
+
+.calendar-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  font-size: 0.8rem;
+  text-align: center;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--divider);
+  margin-bottom: 4px;
+  color: var(--text);
+}
+
+.calendar-body {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+}
+
+.calendar-body span {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  color: var(--text);
+}
+
+.calendar-header .sun,
+.calendar-body .sun {
+  color: #d4686a;
+}
+
+.calendar-header .sat,
+.calendar-body .sat {
+  color: #5a8fcb;
+}
+
+.calendar-body .empty {
+  visibility: hidden;
+}
+
+.highlight-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff !important;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+}
+
+/* Override sat color for highlight */
+.calendar-body .sat.highlight {
+  color: var(--accent);
+}
+
+.calendar-time {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  text-align: center;
+  color: var(--text-dark);
+  margin-top: 16px;
+  letter-spacing: 0.05em;
+}
+
+/* ============================================================
+   6. Gallery Section
+   ============================================================ */
+
+.gallery .section-inner {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.gallery .section-title {
+  padding: 0 24px;
+}
+
+.swiper-slide img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+}
+
+.swiper-pagination-bullet {
+  background: var(--divider);
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+  background: var(--accent);
+}
+
+/* ============================================================
+   7. Location Section
+   ============================================================ */
+
+.location-info {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.venue-name {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-dark);
+  margin-bottom: 6px;
+  letter-spacing: 0.03em;
+}
+
+.venue-address {
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+  color: var(--text);
+}
+
+.venue-note {
+  font-size: 0.8rem;
+  color: #999;
+}
+
+.map-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.map-btn {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--divider);
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-dark);
+  background: #fff;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s;
+}
+
+.map-btn:hover {
+  background: var(--divider);
+}
+
+.transport {
+  border-top: 1px solid var(--divider);
+  padding-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.transport-item strong {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-dark);
+  margin-bottom: 4px;
+  font-weight: 700;
+}
+
+.transport-item p {
+  font-size: 0.82rem;
+  line-height: 1.8;
+  color: var(--text);
+}
+
+/* ============================================================
+   8. Account Section
+   ============================================================ */
+
+.accordion {
+  margin-bottom: 12px;
+}
+
+.accordion-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border: 1px solid var(--divider);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  background: #fff;
+  transition: background 0.2s;
+}
+
+.accordion-toggle:hover {
+  background: #faf7f4;
+}
+
+.accordion-arrow {
+  font-size: 0.7rem;
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.accordion-toggle.open .accordion-arrow {
+  transform: rotate(180deg);
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.4s ease, opacity 0.3s ease;
+}
+
+.accordion-content.open {
+  max-height: 400px;
+  opacity: 1;
+}
+
+.account-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 14px 20px;
+  border: 1px solid var(--divider);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  gap: 6px;
+  background: #fafafa;
+}
+
+.account-holder {
+  width: 100%;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--text-dark);
+}
+
+.account-number {
+  flex: 1;
+  font-size: 0.85rem;
+  color: var(--text);
+}
+
+.copy-btn {
+  padding: 4px 10px;
+  border: 1px solid var(--divider);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: var(--text);
+  background: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.copy-btn:hover {
+  background: var(--divider);
+}
+
+/* ============================================================
+   9. Share Section
+   ============================================================ */
+
+.share-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.share-btn {
+  flex: 1;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.2s;
+}
+
+.share-btn:hover {
+  opacity: 0.85;
+}
+
+.url-btn {
+  background: #3C3C3C;
+  color: #fff;
+}
+
+.kakao-btn {
+  background: #FEE500;
+  color: #3C1E1E;
+}
+
+/* ============================================================
+   10. Footer
+   ============================================================ */
+
+.footer {
+  text-align: center;
+  padding: 32px 24px;
+  background: #f5f0eb;
+}
+
+.footer-names {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  margin-bottom: 6px;
+  letter-spacing: 0.05em;
+}
+
+.footer-date {
+  font-size: 0.8rem;
+  color: #aaa;
+}
