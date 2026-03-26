@@ -356,15 +356,23 @@ function escapeHtml(str) {
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;');
 }
 
 const commentList = document.getElementById('comment-list');
-db.collection('comments')
-  .orderBy('createdAt', 'desc')
-  .onSnapshot((snapshot) => {
-    commentList.innerHTML = '';
-    snapshot.forEach((doc) => {
-      commentList.appendChild(renderComment(doc));
-    });
-  });
+if (commentList) {
+  db.collection('comments')
+    .orderBy('createdAt', 'desc')
+    .onSnapshot(
+      (snapshot) => {
+        commentList.innerHTML = '';
+        snapshot.forEach((doc) => {
+          commentList.appendChild(renderComment(doc));
+        });
+      },
+      (err) => {
+        console.error('Comments listener error:', err);
+      }
+    );
+}
