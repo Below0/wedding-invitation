@@ -10,6 +10,7 @@
   { "src": "images/daily/04.jpg", "caption": "지원업고튀어" },
   { "src": "images/daily/05.jpg", "caption": "바르셀로나 출격 준비" },
   { "src": "images/daily/가우디.jpeg", "caption": "아~ 이게 가우디" },
+  { "src": "images/daily/날씨요괴.jpeg", "caption": "스페인 날씨 요괴들.." },
   { "src": "images/daily/13.jpg", "caption": "크리스마스의 한강공원" },
   { "src": "images/daily/후지산자전거.jpg", "caption": "가와구치코 폭주족" },
   { "src": "images/daily/01.jpg", "caption": "후지산 근처의 한 카페에서" },
@@ -17,9 +18,10 @@
   { "src": "images/daily/하동여행.jpg", "caption": "몽글몽글한 하동 여행" },
   { "src": "images/daily/14.jpg", "caption": "요트 위 광안대교" },
   { "src": "images/daily/08.jpg", "caption": "맥주는 괄괄괄" },
-  { "src": "images/daily/12.jpg", "caption": "인생 네컷" },
-  { "src": "images/daily/헝가리.jpeg", "caption": "한겨울 테토남(?)" },
+  { "src": "images/daily/괴인.jpeg", "caption": "부다페스트의 테토남" },
   { "src": "images/daily/호수.jpeg", "caption": "오스트리아 날씨 요정" },
+  { "src": "images/daily/길빵.jpeg", "caption": "길빵(?)" },
   { "src": "images/daily/02.jpg", "caption": "시골쥐들의 신라호텔 체험" },
-  { "src": "images/daily/03.jpg", "caption": "험난했던 스노보드 입문" }
+  { "src": "images/daily/03.jpg", "caption": "험난했던 스노보드 입문" },
+  { "src": "images/daily/12.jpg"}
 ]
