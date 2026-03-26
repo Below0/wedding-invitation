@@ -42,11 +42,11 @@ function toggleBgm() {
   if (bgmPlaying) {
     bgmAudio.pause();
     bgmPlaying = false;
-    bgmToggle.textContent = '🔇';
+    bgmToggle.querySelector('.bgm-icon').textContent = '🔇';
   } else {
     bgmAudio.play().then(() => {
       bgmPlaying = true;
-      bgmToggle.textContent = '🔊';
+      bgmToggle.querySelector('.bgm-icon').textContent = '🔊';
     }).catch(() => {});
   }
 }
@@ -54,13 +54,15 @@ function toggleBgm() {
 bgmToggle.addEventListener('click', toggleBgm);
 
 // Auto-play on first user interaction
-document.addEventListener('click', function autoPlay() {
+document.addEventListener('click', function autoPlay(e) {
+  if (e.target.closest('#bgm-toggle')) return;
   if (!bgmPlaying) {
     bgmAudio.play().then(() => {
       bgmPlaying = true;
-      bgmToggle.textContent = '🔊';
+      bgmToggle.querySelector('.bgm-icon').textContent = '🔊';
     }).catch(() => {});
   }
+  document.removeEventListener('click', autoPlay);
 }, { once: true });
 
 /* =========================================================
@@ -113,7 +115,7 @@ const gallerySwiper = new Swiper('.gallery-swiper', {
   spaceBetween: 0,
   pagination: { el: '.swiper-pagination', clickable: true },
   loop: true,
-  autoplay: { delay: 4000, disableOnInteraction: true },
+  autoplay: { delay: 4000, disableOnInteraction: false },
 });
 
 /* =========================================================
@@ -127,7 +129,7 @@ document.getElementById('kakao-share').addEventListener('click', () => {
     content: {
       title: CONFIG.OG_TITLE,
       description: CONFIG.OG_DESC,
-      imageUrl: window.location.origin + '/images/sample/01.jpg',
+      imageUrl: new URL('images/sample/01.jpg', CONFIG.SITE_URL).href,
       link: {
         mobileWebUrl: CONFIG.SITE_URL,
         webUrl: CONFIG.SITE_URL,

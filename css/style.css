@@ -482,7 +482,6 @@ a {
 }
 
 .accordion-content.open {
-  max-height: 400px;
   opacity: 1;
 }
 
