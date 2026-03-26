@@ -11,6 +11,22 @@ const CONFIG = {
 };
 
 /* =========================================================
+   2. Firebase
+   ========================================================= */
+const firebaseConfig = {
+  apiKey: "AIzaSyBJbbjRdoBhXJAiHfew5kysEy3xzqXdo-M",
+  authDomain: "wedding-invitation-4e968.firebaseapp.com",
+  databaseURL: "https://wedding-invitation-4e968-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "wedding-invitation-4e968",
+  storageBucket: "wedding-invitation-4e968.firebasestorage.app",
+  messagingSenderId: "594495943096",
+  appId: "1:594495943096:web:de0c3bb71fe1796e1f9f4d",
+  measurementId: "G-J8H5CJ6WN1"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+/* =========================================================
    2. Toast utility
    ========================================================= */
 function showToast(message) {
