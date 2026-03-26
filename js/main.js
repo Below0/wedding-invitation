@@ -361,16 +361,34 @@ function escapeHtml(str) {
 }
 
 const commentList = document.getElementById('comment-list');
+const loadMoreBtn = document.getElementById('comment-load-more');
+const PAGE_SIZE = 5;
+let allComments = [];
+let shownCount = 0;
+
+function renderComments() {
+  const next = allComments.slice(shownCount, shownCount + PAGE_SIZE);
+  next.forEach((child) => {
+    commentList.appendChild(renderComment(child));
+  });
+  shownCount += next.length;
+  loadMoreBtn.hidden = shownCount >= allComments.length;
+}
+
 if (commentList) {
+  if (loadMoreBtn) {
+    loadMoreBtn.addEventListener('click', renderComments);
+  }
+
   db.ref('comments').orderByChild('createdAt').on(
     'value',
     (snapshot) => {
-      const items = [];
-      snapshot.forEach((child) => items.push(child));
+      allComments = [];
+      snapshot.forEach((child) => { allComments.push(child); });
+      allComments.reverse();
+      shownCount = 0;
       commentList.innerHTML = '';
-      items.reverse().forEach((child) => {
-        commentList.appendChild(renderComment(child));
-      });
+      renderComments();
     },
     (err) => {
       console.error('Comments listener error:', err);

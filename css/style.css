@@ -765,3 +765,21 @@ a {
   line-height: 1.6;
   word-break: break-all;
 }
+
+.comment-load-more {
+  display: block;
+  margin: 16px auto 0;
+  padding: 8px 24px;
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.comment-load-more:active {
+  background: var(--accent);
+  color: #fff;
+}
