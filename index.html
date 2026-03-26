@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이하영 ♥ 신지원 결혼합니다</title>
+  <meta name="description" content="이하영 ♥ 신지원 결혼식에 초대합니다. 2027년 5월 29일 토요일 오후 3시, 우리은행 본점 4층">
+  <meta property="og:title" content="이하영 ♥ 신지원 결혼합니다">
+  <meta property="og:description" content="2027년 5월 29일 토요일 오후 3시, 우리은행 본점 4층">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Pretendard -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- BGM Toggle (fixed) -->
+  <button id="bgm-toggle" class="bgm-btn" aria-label="배경음악 토글">
+    <span class="bgm-icon">🔇</span>
+  </button>
+  <audio id="bgm" loop preload="auto">
+    <source src="audio/bgm.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast" aria-live="polite"></div>
+
+  <main class="invitation">
+
+    <!-- 1. Hero -->
+    <section id="hero" class="section hero">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <p class="hero-label">Wedding Invitation</p>
+        <h1 class="hero-names">이하영 <span class="heart">♥</span> 신지원</h1>
+        <p class="hero-date">2027. 05. 29 SAT PM 3:00</p>
+        <p class="hero-venue">우리은행 본점 4층</p>
+      </div>
+      <div class="scroll-down">
+        <span class="scroll-arrow"></span>
+      </div>
+    </section>
+
+    <!-- 2. Greeting -->
+    <section id="greeting" class="section greeting">
+      <div class="section-inner">
+        <div class="divider">✻</div>
+        <p class="greeting-text">
+          서로 다른 길을 걸어온 두 사람이<br>
+          이제 같은 길을 함께 걸어가려 합니다.<br><br>
+          소중한 분들을 모시고<br>
+          사랑의 약속을 나누고자 합니다.<br><br>
+          바쁘시더라도 오셔서<br>
+          따뜻한 축하로 자리를 빛내주세요.
+        </p>
+        <p class="greeting-names">이하영 · 신지원</p>
+      </div>
+    </section>
+
+    <!-- 3. Calendar -->
+    <section id="calendar" class="section calendar">
+      <div class="section-inner">
+        <h2 class="section-title">2027년 5월</h2>
+        <div class="calendar-grid">
+          <div class="calendar-header">
+            <span class="sun">일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span class="sat">토</span>
+          </div>
+          <div class="calendar-body">
+            <!-- Row 1: May 2027 starts on Saturday -->
+            <span class="empty"></span><span class="empty"></span><span class="empty"></span><span class="empty"></span><span class="empty"></span><span class="empty"></span><span class="sat">1</span>
+            <!-- Row 2 -->
+            <span class="sun">2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span class="sat">8</span>
+            <!-- Row 3 -->
+            <span class="sun">9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span class="sat">15</span>
+            <!-- Row 4 -->
+            <span class="sun">16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span class="sat">22</span>
+            <!-- Row 5 -->
+            <span class="sun">23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span class="sat highlight"><span class="highlight-circle">29</span></span>
+            <!-- Row 6 -->
+            <span class="sun">30</span><span>31</span><span class="empty"></span><span class="empty"></span><span class="empty"></span><span class="empty"></span><span class="empty"></span>
+          </div>
+        </div>
+        <p class="calendar-time">토요일 오후 3시</p>
+      </div>
+    </section>
+
+    <!-- 4. Gallery -->
+    <section id="gallery" class="section gallery">
+      <div class="section-inner">
+        <h2 class="section-title">Gallery</h2>
+        <div class="swiper gallery-swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="images/sample/01.jpg" alt="웨딩 사진 1" loading="lazy"></div>
+            <div class="swiper-slide"><img src="images/sample/02.jpg" alt="웨딩 사진 2" loading="lazy"></div>
+            <div class="swiper-slide"><img src="images/sample/03.jpg" alt="웨딩 사진 3" loading="lazy"></div>
+            <div class="swiper-slide"><img src="images/sample/04.jpg" alt="웨딩 사진 4" loading="lazy"></div>
+            <div class="swiper-slide"><img src="images/sample/05.jpg" alt="웨딩 사진 5" loading="lazy"></div>
+            <div class="swiper-slide"><img src="images/sample/06.jpg" alt="웨딩 사진 6" loading="lazy"></div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Location -->
+    <section id="location" class="section location">
+      <div class="section-inner">
+        <h2 class="section-title">오시는 길</h2>
+        <div class="location-info">
+          <p class="venue-name">우리은행 본점 4층</p>
+          <p class="venue-address">서울 중구 소공로 51</p>
+          <p class="venue-note">회현역 1번 출구 근처</p>
+        </div>
+        <div class="map-buttons">
+          <a href="https://map.kakao.com/?q=서울+중구+소공로+51" target="_blank" rel="noopener" class="map-btn kakao">카카오맵</a>
+          <a href="https://map.naver.com/v5/search/서울+중구+소공로+51" target="_blank" rel="noopener" class="map-btn naver">네이버맵</a>
+          <button class="map-btn copy-addr" data-address="서울 중구 소공로 51">주소 복사</button>
+        </div>
+        <div class="transport">
+          <div class="transport-item">
+            <strong>지하철</strong>
+            <p>4호선 회현역 1번 출구<br>4호선 명동역 4번 출구</p>
+          </div>
+          <div class="transport-item">
+            <strong>버스</strong>
+            <p>간선: 104, 105, 143, 263, 401, 406, 421, 503, 505, 507, 604<br>
+               지선: 7011, 7013A, 7013B<br>
+               순환: 03</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Account -->
+    <section id="account" class="section account">
+      <div class="section-inner">
+        <h2 class="section-title">마음 전하실 곳</h2>
+        <div class="accordion">
+          <button class="accordion-toggle" data-target="groom-accounts">
+            <span>신랑 측</span>
+            <span class="accordion-arrow">▼</span>
+          </button>
+          <div id="groom-accounts" class="accordion-content">
+            <div class="account-item">
+              <p class="account-holder">이하영 (신랑)</p>
+              <p class="account-number">○○은행 000-000000-00000</p>
+              <button class="copy-btn" data-copy="000-000000-00000">복사</button>
+            </div>
+          </div>
+        </div>
+        <div class="accordion">
+          <button class="accordion-toggle" data-target="bride-accounts">
+            <span>신부 측</span>
+            <span class="accordion-arrow">▼</span>
+          </button>
+          <div id="bride-accounts" class="accordion-content">
+            <div class="account-item">
+              <p class="account-holder">신지원 (신부)</p>
+              <p class="account-number">○○은행 000-000000-00000</p>
+              <button class="copy-btn" data-copy="000-000000-00000">복사</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Share -->
+    <section id="share" class="section share">
+      <div class="section-inner">
+        <div class="share-buttons">
+          <button id="copy-url" class="share-btn url-btn">URL 복사</button>
+          <button id="kakao-share" class="share-btn kakao-btn">카카오톡 공유</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Footer -->
+    <footer class="footer">
+      <p class="footer-names">이하영 ♥ 신지원</p>
+      <p class="footer-date">2027. 05. 29</p>
+    </footer>
+
+  </main>
+
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <!-- Kakao SDK -->
+  <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js"></script>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
