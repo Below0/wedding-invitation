@@ -362,6 +362,37 @@ a {
   background: var(--accent);
 }
 
+/* Gallery Toggle Button */
+.gallery-toggle {
+  display: block;
+  margin: 20px auto 0;
+  padding: 8px 20px;
+  font-size: 0.82rem;
+  color: var(--text);
+  border: 1px solid var(--divider);
+  border-radius: 20px;
+  background: #fff;
+  transition: all 0.3s;
+}
+
+.gallery-toggle:hover {
+  background: #f5f0eb;
+}
+
+.gallery-toggle.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.gallery-swiper {
+  transition: opacity 0.4s ease;
+}
+
+.gallery-swiper.switching {
+  opacity: 0;
+}
+
 /* ============================================================
    7. Location Section
    ============================================================ */
