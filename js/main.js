@@ -1,6 +1,93 @@
 // Mobile Wedding Invitation — main.js
 
 /* =========================================================
+   0. Terminal Loading Screen
+   ========================================================= */
+(function () {
+  const screen = document.getElementById('terminal-screen');
+  const body   = document.getElementById('terminal-body');
+  if (!screen || !body) return;
+
+  const LINES = [
+    { type: 'cmd',  text: 'git tag -a v1.0.0 -m "처음 만난 날" 2018-12-02' },
+    { type: 'out',  text: 'Tagged: v1.0.0 — 2018-12-02', cls: 'muted' },
+    { type: 'cmd',  text: 'git tag -a v2.0.0 -m "결혼"' },
+    { type: 'out',  text: 'Tagged: v2.0.0 — 이하영 ♥ 신지원', cls: 'success' },
+    { type: 'cmd',  text: './wedding.sh --date 2027-05-29' },
+    { type: 'out',  text: '💍 initializing ceremony... done!', cls: 'success' },
+  ];
+
+  let lineIdx = 0;
+  let charIdx = 0;
+  let currentEl = null;
+  const cursor = document.createElement('span');
+  cursor.className = 'terminal-cursor';
+
+  function addPrompt() {
+    const line = document.createElement('span');
+    line.className = 'terminal-line';
+    const prompt = document.createElement('span');
+    prompt.className = 'terminal-prompt';
+    prompt.textContent = '$ ';
+    line.appendChild(prompt);
+    body.appendChild(line);
+    return line;
+  }
+
+  function typeNext() {
+    if (lineIdx >= LINES.length) {
+      cursor.remove();
+      setTimeout(finish, 600);
+      return;
+    }
+
+    const item = LINES[lineIdx];
+
+    if (charIdx === 0) {
+      if (item.type === 'cmd') {
+        currentEl = addPrompt();
+        const cmdSpan = document.createElement('span');
+        cmdSpan.className = 'terminal-cmd';
+        currentEl.appendChild(cmdSpan);
+        currentEl.appendChild(cursor);
+        currentEl = cmdSpan;
+      } else {
+        const line = document.createElement('span');
+        line.className = 'terminal-line';
+        const outSpan = document.createElement('span');
+        outSpan.className = 'terminal-out' + (item.cls ? ' ' + item.cls : '');
+        line.appendChild(outSpan);
+        body.appendChild(line);
+        currentEl = outSpan;
+        currentEl.parentElement.appendChild(cursor);
+      }
+    }
+
+    if (charIdx < item.text.length) {
+      currentEl.textContent += item.text[charIdx];
+      charIdx++;
+      const delay = item.type === 'cmd' ? 40 + Math.random() * 30 : 15;
+      setTimeout(typeNext, delay);
+    } else {
+      lineIdx++;
+      charIdx = 0;
+      const pause = item.type === 'cmd' ? 300 : 120;
+      setTimeout(typeNext, pause);
+    }
+  }
+
+  function finish() {
+    screen.classList.add('fade-out');
+    screen.addEventListener('transitionend', () => screen.remove(), { once: true });
+  }
+
+  // 스킵: 화면 탭/클릭 시 즉시 종료
+  screen.addEventListener('click', finish);
+
+  setTimeout(typeNext, 400);
+})();
+
+/* =========================================================
    1. Config
    ========================================================= */
 const CONFIG = {
