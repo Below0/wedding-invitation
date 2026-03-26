@@ -129,7 +129,7 @@ document.getElementById('kakao-share').addEventListener('click', () => {
     content: {
       title: CONFIG.OG_TITLE,
       description: CONFIG.OG_DESC,
-      imageUrl: new URL('images/sample/01.jpg', CONFIG.SITE_URL).href,
+      imageUrl: new URL('images/hero/main.jpg', CONFIG.SITE_URL).href,
       link: {
         mobileWebUrl: CONFIG.SITE_URL,
         webUrl: CONFIG.SITE_URL,
