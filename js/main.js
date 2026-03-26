@@ -136,7 +136,9 @@ const GALLERY_DAILY = [
   { src: 'images/daily/05.jpg', alt: '일상 사진 5' },
   { src: 'images/daily/06.jpg', alt: '일상 사진 6' },
   { src: 'images/daily/07.jpg', alt: '일상 사진 7' },
-  { src: 'images/daily/09.jpg', alt: '일상 사진 8' },
+  { src: 'images/daily/08.jpg', alt: '일상 사진 8' },
+  { src: 'images/daily/09.jpg', alt: '일상 사진 9' },
+  { src: 'images/daily/10.jpg', alt: '일상 사진 10' },
 ];
 
 let showingDaily = false;
