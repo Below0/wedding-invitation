@@ -9,11 +9,9 @@
   if (!screen || !body) return;
 
   const LINES = [
-    { type: 'cmd',  text: 'git tag -a v1.0.0 -m "처음 만난 날" 2018-12-02' },
-    { type: 'out',  text: 'Tagged: v1.0.0 — 2018-12-02', cls: 'muted' },
-    { type: 'cmd',  text: 'git tag -a v2.0.0 -m "결혼"' },
-    { type: 'out',  text: 'Tagged: v2.0.0 — 이하영 ♥ 신지원', cls: 'success' },
-    { type: 'cmd',  text: './wedding.sh --date 2027-05-29' },
+    { type: 'cmd',  text: 'git tag v1.0.0  # 처음 만난 날 · 2018-12-02' },
+    { type: 'cmd',  text: 'git tag v2.0.0  # 결혼 · 2027-05-29' },
+    { type: 'cmd',  text: './wedding.sh' },
     { type: 'out',  text: '💍 initializing ceremony... done!', cls: 'success' },
   ];
 
