@@ -24,7 +24,7 @@ const firebaseConfig = {
   measurementId: "G-J8H5CJ6WN1"
 };
 firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
+const db = firebase.database();
 
 /* =========================================================
    2. Toast utility
@@ -310,11 +310,11 @@ if (commentForm) {
     submitBtn.disabled = true;
 
     try {
-      await db.collection('comments').add({
+      await db.ref('comments').push({
         name,
         message,
         graduate: localStorage.getItem('daily_graduate') === 'true',
-        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        createdAt: firebase.database.ServerValue.TIMESTAMP,
       });
       commentNameInput.value = '';
       commentMessageInput.value = '';
@@ -329,7 +329,7 @@ if (commentForm) {
 
 function formatTime(timestamp) {
   if (!timestamp) return '';
-  const d = timestamp.toDate();
+  const d = new Date(timestamp);
   const mm = String(d.getMonth() + 1).padStart(2, '0');
   const dd = String(d.getDate()).padStart(2, '0');
   const hh = String(d.getHours()).padStart(2, '0');
@@ -337,8 +337,8 @@ function formatTime(timestamp) {
   return `${mm}/${dd} ${hh}:${min}`;
 }
 
-function renderComment(doc) {
-  const { name, message, graduate, createdAt } = doc.data();
+function renderComment(child) {
+  const { name, message, graduate, createdAt } = child.val();
   const li = document.createElement('li');
   li.className = 'comment-item';
   li.innerHTML = `
@@ -362,17 +362,18 @@ function escapeHtml(str) {
 
 const commentList = document.getElementById('comment-list');
 if (commentList) {
-  db.collection('comments')
-    .orderBy('createdAt', 'desc')
-    .onSnapshot(
-      (snapshot) => {
-        commentList.innerHTML = '';
-        snapshot.forEach((doc) => {
-          commentList.appendChild(renderComment(doc));
-        });
-      },
-      (err) => {
-        console.error('Comments listener error:', err);
-      }
-    );
+  db.ref('comments').orderByChild('createdAt').on(
+    'value',
+    (snapshot) => {
+      const items = [];
+      snapshot.forEach((child) => items.push(child));
+      commentList.innerHTML = '';
+      items.reverse().forEach((child) => {
+        commentList.appendChild(renderComment(child));
+      });
+    },
+    (err) => {
+      console.error('Comments listener error:', err);
+    }
+  );
 }
