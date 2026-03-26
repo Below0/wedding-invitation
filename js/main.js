@@ -128,45 +128,42 @@ const GALLERY_WEDDING = [
   { src: 'images/gallery/06.jpg', alt: '웨딩 사진 6' },
 ];
 
-const GALLERY_DAILY = [
-  { src: 'images/daily/01.jpg', alt: '일상 사진 1' },
-  { src: 'images/daily/02.jpg', alt: '일상 사진 2' },
-  { src: 'images/daily/03.jpg', alt: '일상 사진 3' },
-  { src: 'images/daily/04.jpg', alt: '일상 사진 4' },
-  { src: 'images/daily/05.jpg', alt: '일상 사진 5' },
-  { src: 'images/daily/06.jpg', alt: '일상 사진 6' },
-  { src: 'images/daily/07.jpg', alt: '일상 사진 7' },
-  { src: 'images/daily/08.jpg', alt: '일상 사진 8' },
-  { src: 'images/daily/09.jpg', alt: '일상 사진 9' },
-  { src: 'images/daily/10.jpg', alt: '일상 사진 10' },
-];
-
+let dailyPhotos = [];
 let showingDaily = false;
 const galleryToggleBtn = document.getElementById('gallery-toggle');
 const swiperEl = document.querySelector('.gallery-swiper');
 
-galleryToggleBtn.addEventListener('click', () => {
-  showingDaily = !showingDaily;
-  const photos = showingDaily ? GALLERY_DAILY : GALLERY_WEDDING;
+// Load daily photos from manifest JSON
+fetch('images/daily/photos.json')
+  .then(res => res.json())
+  .then(data => { dailyPhotos = data; })
+  .catch(() => {});
 
-  galleryToggleBtn.classList.toggle('active', showingDaily);
-  galleryToggleBtn.textContent = showingDaily ? '웨딩 촬영본 보기 💍' : '우리의 일상 엿보기 👀';
+function buildSlide(photo) {
+  const caption = photo.caption
+    ? `<div class="slide-caption">${photo.caption}</div>`
+    : '';
+  return `<div class="swiper-slide">
+    <img src="${photo.src}" alt="${photo.caption || ''}" loading="lazy">
+    ${caption}
+  </div>`;
+}
 
-  // Fade out
+function switchGallery(photos) {
   swiperEl.classList.add('switching');
-
   setTimeout(() => {
-    // Replace slides
     gallerySwiper.removeAllSlides();
-    const newSlides = photos.map(p =>
-      `<div class="swiper-slide"><img src="${p.src}" alt="${p.alt}" loading="lazy"></div>`
-    );
-    gallerySwiper.appendSlide(newSlides);
+    gallerySwiper.appendSlide(photos.map(buildSlide));
     gallerySwiper.slideTo(0, 0);
-
-    // Fade in
     swiperEl.classList.remove('switching');
   }, 400);
+}
+
+galleryToggleBtn.addEventListener('click', () => {
+  showingDaily = !showingDaily;
+  galleryToggleBtn.classList.toggle('active', showingDaily);
+  galleryToggleBtn.textContent = showingDaily ? '웨딩 촬영본 보기 💍' : '우리의 일상 엿보기 👀';
+  switchGallery(showingDaily ? dailyPhotos : GALLERY_WEDDING);
 });
 
 /* =========================================================
