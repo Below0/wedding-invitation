@@ -195,7 +195,37 @@
       </div>
     </section>
 
-    <!-- 8. Footer -->
+    <!-- 8. Comments -->
+    <section id="comments" class="section comments">
+      <div class="section-inner">
+        <h2 class="section-title">방명록</h2>
+        <p class="section-desc">축하 메시지를 남겨주세요 💌</p>
+
+        <form id="comment-form" class="comment-form" autocomplete="off">
+          <input
+            type="text"
+            id="comment-name"
+            class="comment-input"
+            placeholder="이름"
+            maxlength="20"
+            required
+          />
+          <textarea
+            id="comment-message"
+            class="comment-textarea"
+            placeholder="메시지를 입력하세요 (최대 100자)"
+            maxlength="100"
+            required
+            rows="3"
+          ></textarea>
+          <button type="submit" class="comment-submit">남기기</button>
+        </form>
+
+        <ul id="comment-list" class="comment-list"></ul>
+      </div>
+    </section>
+
+    <!-- 9. Footer -->
     <footer class="footer">
       <p class="footer-names">이하영 ♥ 신지원</p>
       <p class="footer-date">2027. 05. 29</p>
