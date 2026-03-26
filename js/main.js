@@ -299,27 +299,30 @@ const commentForm = document.getElementById('comment-form');
 const commentNameInput = document.getElementById('comment-name');
 const commentMessageInput = document.getElementById('comment-message');
 
-commentForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const name = commentNameInput.value.trim();
-  const message = commentMessageInput.value.trim();
-  if (!name || !message) return;
+if (commentForm) {
+  commentForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name = commentNameInput.value.trim();
+    const message = commentMessageInput.value.trim();
+    if (!name || !message) return;
 
-  const submitBtn = commentForm.querySelector('.comment-submit');
-  submitBtn.disabled = true;
+    const submitBtn = commentForm.querySelector('.comment-submit');
+    submitBtn.disabled = true;
 
-  try {
-    await db.collection('comments').add({
-      name,
-      message,
-      graduate: localStorage.getItem('daily_graduate') === 'true',
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-    });
-    commentNameInput.value = '';
-    commentMessageInput.value = '';
-  } catch (err) {
-    showToast('댓글 저장에 실패했습니다');
-  } finally {
-    submitBtn.disabled = false;
-  }
-});
+    try {
+      await db.collection('comments').add({
+        name,
+        message,
+        graduate: localStorage.getItem('daily_graduate') === 'true',
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      });
+      commentNameInput.value = '';
+      commentMessageInput.value = '';
+    } catch (err) {
+      console.error(err);
+      showToast('댓글 저장에 실패했습니다');
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+}
